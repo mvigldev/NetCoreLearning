@@ -35,12 +35,14 @@ Flow:
 
 Redis distributed Cache clears every night.
 
+DatabaseCreationScript.sql creates the databace with sample data for Professors, Students and Lessons.
+
 Everything reusable/generic is included in Infrastructure solution folder:
 NetCoreLearning.Infrastructure.Authentication.JWT
    Implements a JWT authentication service with claims and policy requirements and handlers.
 
 NetCoreLearning.Infrastructure.EventBus.Database
-   Implements an event database that maintaince the event states and it is used for atomicity between an API action and an event Publish action.
+   Implements an event database that maintaince the event states and it is used for atomicity between an API action and an event Publish action. The logging table must be in the same database as the API DB.
 NetCoreLearning.Infrastructure.EventBus.NServiceBus
   Implements an event utilizing NServiceBus nuget package with learning transport and persistence.
 
