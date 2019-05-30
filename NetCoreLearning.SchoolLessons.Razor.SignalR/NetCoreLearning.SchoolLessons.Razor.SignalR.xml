@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCoreLearning.SchoolLessons.Razor.SignalR</name>
+    </assembly>
+    <members>
+        <member name="T:NetCoreLearning.SchoolLessons.Razor.SignalR.HostedServices.HubWorker">
+            <summary>
+            BackgroundService that reads distributed cache and sends added Grade Assignments to the client through hub
+            </summary>
+            <seealso cref="T:Microsoft.Extensions.Hosting.BackgroundService" />
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.HostedServices.HubWorker.#ctor(Microsoft.Extensions.Logging.ILogger{NetCoreLearning.SchoolLessons.Razor.SignalR.HostedServices.HubWorker},Microsoft.AspNetCore.SignalR.IHubContext{NetCoreLearning.SchoolLessons.Razor.SignalR.Hubs.GradeAssignmentsHub,NetCoreLearning.SchoolLessons.Razor.SignalR.IShowLiveGradeAssignments},Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.Razor.SignalR.HostedServices.HubWorker"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="gradeAssignmentsHub">The grade assignments hub.</param>
+            <param name="cache">The cache.</param>
+            <exception cref="T:System.ArgumentNullException">
+            logger
+            or
+            gradeAssignmentsHub
+            or
+            cache
+            </exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.HostedServices.HubWorker.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            This method is called when the <see cref="T:Microsoft.Extensions.Hosting.IHostedService" /> starts. The implementation should return a task that represents
+            the lifetime of the long running operation(s) being performed.
+            </summary>
+            <param name="stoppingToken">Triggered when <see cref="M:Microsoft.Extensions.Hosting.IHostedService.StopAsync(System.Threading.CancellationToken)" /> is called.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task" /> that represents the long running operations.
+            </returns>
+            <remarks>
+            Every 1 minute reads cache and sends delta items to all clients.
+            </remarks>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Razor.SignalR.Hubs.GradeAssignmentsHub">
+            <summary>
+            The signalr hub.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.SignalR.Hub`1" />
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.Hubs.GradeAssignmentsHub.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.Razor.SignalR.Hubs.GradeAssignmentsHub"/> class.
+            </summary>
+            <param name="cache">The cache.</param>
+            <exception cref="T:System.ArgumentNullException">cache</exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.Hubs.GradeAssignmentsHub.SendLiveGradeAssignmentsToClient">
+            <summary>
+            Sends the live grade assignments to client. Only when the client asks(usually on connect).
+            </summary>
+            <returns>A task with all the grade assignments in the distributed cache</returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Razor.SignalR.IShowLiveGradeAssignments">
+            <summary>
+            Interface for client methods
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.IShowLiveGradeAssignments.ShowLiveGradeAssignments(System.Collections.Generic.IEnumerable{NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment})">
+            <summary>
+            Shows the live grade assignments.
+            </summary>
+            <param name="liveGradeAssignments">The live grade assignments.</param>
+            <returns>The list of live grade assignments</returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.IShowLiveGradeAssignments.ResetLiveGradeAssignments">
+            <summary>
+            Resets the live grade assignments.
+            </summary>
+            <returns>task to reset the grade assignments</returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Razor.SignalR.Pages.IndexModel">
+            <summary>
+            The model of Index view.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.RazorPages.PageModel" />
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.Razor.SignalR.Pages.IndexModel.GradeAssignments">
+            <summary>
+            Gets the list of <see cref="T:NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment"/>s.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.Pages.IndexModel.OnGet">
+            <summary>
+            on page load get empty list. To be filled by signal r javascript client live.
+            </summary>
+            <returns>Empty list of <see cref="T:NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment"/>s</returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Razor.SignalR.Startup">
+            <summary>
+            Entry point of the site
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.Razor.SignalR.Startup"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.Razor.SignalR.Startup.Configuration">
+            <summary>
+            Gets the site configuration.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Razor.SignalR.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            Configures the specified application.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The env.</param>
+        </member>
+    </members>
+</doc>

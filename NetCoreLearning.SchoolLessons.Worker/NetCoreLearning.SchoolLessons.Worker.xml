@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCoreLearning.SchoolLessons.Worker</name>
+    </assembly>
+    <members>
+        <member name="T:NetCoreLearning.SchoolLessons.Worker.EventBusService">
+            <summary>
+            Hosted service responsible to start and stop the event bus only upon the application life time.
+            </summary>
+            <seealso cref="T:Microsoft.Extensions.Hosting.IHostedService" />
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.EventBusService.#ctor(Microsoft.Extensions.Logging.ILogger{NetCoreLearning.SchoolLessons.Worker.EventBusService},NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBus)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.Worker.EventBusService"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="eventBus">The event bus.</param>
+            <exception cref="T:System.ArgumentNullException">
+            logger
+            or
+            eventBus
+            </exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.EventBusService.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            Triggered when the application host is ready to start the service.
+            </summary>
+            <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.EventBusService.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+            Triggered when the application host is performing a graceful shutdown.
+            </summary>
+            <param name="cancellationToken">Indicates that the shutdown process should no longer be graceful.</param>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Worker.GradeAssignmentEventHandler">
+            <summary>
+            The event handler for an added GradeAssignment. 
+            </summary>
+            <seealso cref="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBusSubscriber`1"/>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.GradeAssignmentEventHandler.Handle(NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event{NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment},NServiceBus.IMessageHandlerContext)">
+            <summary>
+            Handles the specified event:Adds in distributed cache the value. This value expires at the end of the day.
+            </summary>
+            <param name="event">The event to handle.</param>
+            <param name="context">The <see cref="T:NServiceBus.IMessageHandlerContext" /> with the info of the event bus.</param>
+            <returns>
+            A task that handles the specified event.
+            </returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Worker.GradeAssignmentWorker">
+            <summary>
+            background service that creates a Grade assignment evry 5 seconds
+            </summary>
+            <seealso cref="T:Microsoft.Extensions.Hosting.BackgroundService" />
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.GradeAssignmentWorker.#ctor(Microsoft.Extensions.Logging.ILogger{NetCoreLearning.SchoolLessons.Worker.GradeAssignmentWorker},NetCoreLearning.SchoolLessons.Worker.ISchoolLessonsService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.Worker.GradeAssignmentWorker"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="schoolLessonsService">The school lessons service.</param>
+            <exception cref="T:System.ArgumentNullException">
+            logger
+            or
+            schoolLessonsService
+            </exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.GradeAssignmentWorker.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            This method is called when the <see cref="T:Microsoft.Extensions.Hosting.IHostedService" /> starts. The implementation should return a task that represents
+            the lifetime of the long running operation(s) being performed.
+            </summary>
+            <param name="stoppingToken">Triggered when <see cref="M:Microsoft.Extensions.Hosting.IHostedService.StopAsync(System.Threading.CancellationToken)" /> is called.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task" /> that represents the long running operations.
+            </returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.GradeAssignmentWorker.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            Triggered when the application host is ready to start the service.
+            </summary>
+            <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Worker.ISchoolLessonsService">
+            <summary>
+            Service contract to access the SchoolLessos API
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.ISchoolLessonsService.Authenticate">
+            <summary>
+            Authenticates to the API.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.ISchoolLessonsService.CreateGradeAssignmentAsync(NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment)">
+            <summary>
+            Creates the grade assignment asynchronous.
+            </summary>
+            <param name="gradeAssigment">The grade assignment.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.ISchoolLessonsService.GetStudentsAsync">
+            <summary>
+            Gets the students asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.ISchoolLessonsService.GetLessonsAsync">
+            <summary>
+            Gets the lessons asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.ISchoolLessonsService.GetProfessorsAsync">
+            <summary>
+            Gets the professors asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Worker.Program">
+            <summary>
+            Entry point of the app.
+            </summary>
+        </member>
+        <member name="F:NetCoreLearning.SchoolLessons.Worker.Program.ServiceProviderInstance">
+            <summary>
+            The service provider instance for the app to get a service on runtime.(Is needed only for the event handler of NService bus)
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.Program.Main">
+            <summary>
+            Entry point of the app.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.Program.CreateHostBuilder">
+            <summary>
+            Creates the host builder.
+            </summary>
+            <returns>The hots</returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Worker.SchoolLesonsAPISettings">
+            <summary>
+            The settings object from app.json
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.Worker.SchoolLesonsAPISettings.Url">
+            <summary>
+            Gets or sets the SchoolLessons API base URL.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.Worker.SchoolLesonsAPISettings.Username">
+            <summary>
+            Gets or sets the UserName to connect to the API.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.Worker.SchoolLesonsAPISettings.Password">
+            <summary>
+            Gets or sets the password to connect to the API.
+            </summary>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Worker.SchoolLessonsService">
+            <summary>
+            Implementation of <see cref="T:NetCoreLearning.SchoolLessons.Worker.ISchoolLessonsService"/>
+            </summary>
+            <seealso cref="T:NetCoreLearning.SchoolLessons.Worker.ISchoolLessonsService" />
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.SchoolLessonsService.#ctor(System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Options.IOptions{NetCoreLearning.SchoolLessons.Worker.SchoolLesonsAPISettings})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.Worker.SchoolLessonsService" /> class.
+            </summary>
+            <param name="clientFactory">The client factory.</param>
+            <param name="settings">The settings.</param>
+            <exception cref="T:System.ArgumentNullException">httpClient
+            or
+            settings
+            or
+            Value
+            or
+            URL</exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.SchoolLessonsService.Authenticate">
+            <summary>
+            Authenticates to the API.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.SchoolLessonsService.CreateGradeAssignmentAsync(NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment)">
+            <summary>
+            Creates the grade assignment asynchronous.
+            </summary>
+            <param name="gradeAssigment">The grade assignment.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">gradeAssigment</exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.SchoolLessonsService.GetStudentsAsync">
+            <summary>
+            Gets the students asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.SchoolLessonsService.GetLessonsAsync">
+            <summary>
+            Gets the lessons asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.Worker.SchoolLessonsService.GetProfessorsAsync">
+            <summary>
+            Gets the professors asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.Worker.TokenRequest">
+            <summary>
+            Model for any API that requests a toke.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.Worker.TokenRequest.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.Worker.TokenRequest.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+        </member>
+    </members>
+</doc>

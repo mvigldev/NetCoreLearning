@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreLearning.Infrastructure.Authentication.JWT", "NetCoreLearning.Infrastructure.Authentication.JWT\NetCoreLearning.Infrastructure.Authentication.JWT.csproj", "{EFBA9B6F-05CD-4EDC-AD53-0C71295595F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreLearning.Infrastructure.Scheduling.NCrontab", "NetCoreLearning.Infrastructure.Scheduling.NCrontab\NetCoreLearning.Infrastructure.Scheduling.NCrontab.csproj", "{76FE9176-4DC7-4C74-A8FF-909B0D036ABA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreLearning.Infrastructure.EventBus.NServiceBus", "NetCoreLearning.Infrastructure.EventBus.NServiceBus\NetCoreLearning.Infrastructure.EventBus.NServiceBus.csproj", "{A3DFD782-1DCB-498C-BA34-13973CD1DBA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{38CB7A03-5193-43AD-BEB3-7C639C70949F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreLearning.SchoolLessons.DomainModel", "NetCoreLearning.SchoolLessons.DomainModel\NetCoreLearning.SchoolLessons.DomainModel.csproj", "{1FD50883-7CB3-42E3-AFAD-2F628EB3FFB1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreLearning.SchoolLessons.API", "NetCoreLearning.SchoolLessons.API\NetCoreLearning.SchoolLessons.API.csproj", "{1FB5D2BB-325C-4775-AE86-A2879EA450A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreLearning.SchoolLessons.API.Tests", "NetCoreLearning.SchoolLessons.API.Tests\NetCoreLearning.SchoolLessons.API.Tests.csproj", "{FA7B4F73-485F-478C-9C13-DA04E9C7893D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreLearning.Infrastructure.EventBus.Database", "NetCoreLearning.Infrastructure.EventBus.Database\NetCoreLearning.Infrastructure.EventBus.Database.csproj", "{AD7D9313-609B-46C3-B6D6-59BC223337F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreLearning.SchoolLessons.Worker", "NetCoreLearning.SchoolLessons.Worker\NetCoreLearning.SchoolLessons.Worker.csproj", "{FE691C26-2165-422D-81F0-E34B41812C43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreLearning.SchoolLessons.Razor.SignalR", "NetCoreLearning.SchoolLessons.Razor.SignalR\NetCoreLearning.SchoolLessons.Razor.SignalR.csproj", "{71546EBB-5966-425A-8FF3-C78D2B5AC8E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFBA9B6F-05CD-4EDC-AD53-0C71295595F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFBA9B6F-05CD-4EDC-AD53-0C71295595F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFBA9B6F-05CD-4EDC-AD53-0C71295595F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFBA9B6F-05CD-4EDC-AD53-0C71295595F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76FE9176-4DC7-4C74-A8FF-909B0D036ABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76FE9176-4DC7-4C74-A8FF-909B0D036ABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76FE9176-4DC7-4C74-A8FF-909B0D036ABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76FE9176-4DC7-4C74-A8FF-909B0D036ABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3DFD782-1DCB-498C-BA34-13973CD1DBA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3DFD782-1DCB-498C-BA34-13973CD1DBA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3DFD782-1DCB-498C-BA34-13973CD1DBA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3DFD782-1DCB-498C-BA34-13973CD1DBA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD50883-7CB3-42E3-AFAD-2F628EB3FFB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD50883-7CB3-42E3-AFAD-2F628EB3FFB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD50883-7CB3-42E3-AFAD-2F628EB3FFB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD50883-7CB3-42E3-AFAD-2F628EB3FFB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FB5D2BB-325C-4775-AE86-A2879EA450A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FB5D2BB-325C-4775-AE86-A2879EA450A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FB5D2BB-325C-4775-AE86-A2879EA450A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FB5D2BB-325C-4775-AE86-A2879EA450A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA7B4F73-485F-478C-9C13-DA04E9C7893D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7B4F73-485F-478C-9C13-DA04E9C7893D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7B4F73-485F-478C-9C13-DA04E9C7893D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7B4F73-485F-478C-9C13-DA04E9C7893D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD7D9313-609B-46C3-B6D6-59BC223337F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD7D9313-609B-46C3-B6D6-59BC223337F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD7D9313-609B-46C3-B6D6-59BC223337F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD7D9313-609B-46C3-B6D6-59BC223337F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE691C26-2165-422D-81F0-E34B41812C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE691C26-2165-422D-81F0-E34B41812C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE691C26-2165-422D-81F0-E34B41812C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE691C26-2165-422D-81F0-E34B41812C43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71546EBB-5966-425A-8FF3-C78D2B5AC8E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71546EBB-5966-425A-8FF3-C78D2B5AC8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71546EBB-5966-425A-8FF3-C78D2B5AC8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71546EBB-5966-425A-8FF3-C78D2B5AC8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EFBA9B6F-05CD-4EDC-AD53-0C71295595F8} = {38CB7A03-5193-43AD-BEB3-7C639C70949F}
+		{76FE9176-4DC7-4C74-A8FF-909B0D036ABA} = {38CB7A03-5193-43AD-BEB3-7C639C70949F}
+		{A3DFD782-1DCB-498C-BA34-13973CD1DBA1} = {38CB7A03-5193-43AD-BEB3-7C639C70949F}
+		{AD7D9313-609B-46C3-B6D6-59BC223337F1} = {38CB7A03-5193-43AD-BEB3-7C639C70949F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CF348EA-E0E3-4A07-B68F-79D7C64AD105}
+	EndGlobalSection
+EndGlobal

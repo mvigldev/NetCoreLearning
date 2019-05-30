@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container">
+    <h1>>Daily Results</h1>
+    <table class="table table-striped table-bordered table-hover table-sm " id="liveGradeAssignmentsTable">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">StudentId </th>
+                <th scope="col">ProfessorId</th>
+                <th scope="col">LessonId</th>
+                <th scope="col">Grade</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+
+    </table>
+</div>
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/index.js"></script>
