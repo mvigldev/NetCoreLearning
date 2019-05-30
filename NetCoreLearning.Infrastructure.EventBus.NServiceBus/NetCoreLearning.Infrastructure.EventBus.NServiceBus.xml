@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCoreLearning.Infrastructure.EventBus.NServiceBus</name>
+    </assembly>
+    <members>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event`1">
+            <summary>
+            Represents an event hat will trigger a job passing model <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">The type of event</typeparam>
+            <seealso cref="T:NServiceBus.IEvent" />
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event`1.Model">
+            <summary>
+            Gets or sets the model for the event.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event`1.Id">
+            <summary>
+            Gets or sets the unique id of the event.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event`1.CreationDate">
+            <summary>
+            Gets the creation date of the event.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event`1"/> class.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event`1.#ctor(System.Guid,System.DateTime,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event`1" /> class.
+            </summary>
+            <param name="eventId">The event identifier.</param>
+            <param name="creationDate">The creation date of the event.</param>
+            <param name="model">The event model.</param>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBus">
+            <summary>
+            Represents an <see cref="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBus"/> implementation utilizing nuget package NServiceBus with LearningTransport and LearningPersistence.
+            </summary>
+            <seealso cref="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBus" />
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBus.EndpointInstance">
+            <summary>
+            Gets the endpoint instance.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBus.Start(System.String,System.Boolean)">
+            <summary>
+            Starts the <see cref="T:NServiceBus.IEndpointInstance" />.
+            </summary>
+            <param name="endpointName">Name of the endpoint.</param>
+            <param name="isSendOnly">Indicates whether this endpoint is sending messages only.</param>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBus.Stop">
+            <summary>
+            Stops the <see cref="T:NServiceBus.IEndpointInstance" />.
+            </summary>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBusPublisher`1">
+            <summary>
+            Event publisher utilizing NserviceBus.
+            </summary>
+            <typeparam name="T"> The model for the event</typeparam>
+            <seealso cref="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBusPublisher`1" />
+            <remarks>
+            Wrapper for unit tets 
+            </remarks>
+        </member>
+        <member name="F:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBusPublisher`1._endpointInstance">
+            <summary>
+            The endpoint instance for the API.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBusPublisher`1.#ctor(NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBus)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBusPublisher`1"/> class.
+            </summary>
+            <param name="eventBus">The event bus to publish the event through.</param>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBusPublisher`1.PublishAsync(NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event{`0})">
+            <summary>
+            Publishes the event asynchronous.
+            </summary>
+            <param name="event">The event to publish.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that publishes the event</returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBusSubscriber`1">
+            <summary>
+            Anny one who wants to subscribe to an event of <typeparamref name="T"/> must derive from this class.
+            </summary>
+            <typeparam name="T">The model for the event</typeparam>
+            <seealso cref="T:NServiceBus.IHandleMessages`1" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.EventBusSubscriber`1.Handle(NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event{`0},NServiceBus.IMessageHandlerContext)">
+            <summary>
+            Handles the specified event.
+            </summary>
+            <param name="event">The event to handle.</param>
+            <param name="context">The <see cref="T:NServiceBus.IMessageHandlerContext"/> with the info of the event bus.</param>
+            <returns>A task that handles the specified event.</returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBus">
+            <summary>
+            Contract for an event bus of type NServiceBus.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBus.EndpointInstance">
+            <summary>
+            Gets the <see cref="T:NServiceBus.IEndpointInstance"/>.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBus.Start(System.String,System.Boolean)">
+            <summary>
+            Starts the <see cref="T:NServiceBus.IEndpointInstance"/>.
+            </summary>
+            <param name="endpointName">Name of the endpoint.</param>
+            <param name="isSendOnly">Indicates whether this endpoint is sending messages only.</param>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBus.Stop">
+            <summary>
+            Stops the <see cref="T:NServiceBus.IEndpointInstance"/>.
+            </summary>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBusPublisher`1">
+            <summary>
+            Contract for an event bus publisher.
+            </summary>
+            <typeparam name="T">The type of the event</typeparam>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBusPublisher`1.PublishAsync(NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event{`0})">
+            <summary>
+            Publishes an event asynchronous.
+            </summary>
+            <param name="event">The event to publish.</param>
+            <returns>A task that publishes the event</returns>
+        </member>
+    </members>
+</doc>

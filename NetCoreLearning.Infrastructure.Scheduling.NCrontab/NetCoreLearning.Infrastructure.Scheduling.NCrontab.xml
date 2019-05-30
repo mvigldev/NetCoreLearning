@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCoreLearning.Infrastructure.Scheduling.NCrontab</name>
+    </assembly>
+    <members>
+        <member name="T:NetCoreLearning.Infrastructure.Scheduling.NCrontab.IScheduledTask">
+            <summary>
+            Specifies a scheduled task that executed a task in scheduled time.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Scheduling.NCrontab.IScheduledTask.Schedule">
+            <summary>
+            Gets the croon expression that the task will be executed.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Scheduling.NCrontab.IScheduledTask.ExecuteAsync">
+            <summary>
+            Executes the asynchronous task according to the schedule.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that will execute the task.</returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerTaskWrapper">
+            <summary>
+            Wrapper class for NCrontab scheduler instance representation for a specific task.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerTaskWrapper.Schedule">
+            <summary>
+            Gets or sets the <see cref="T:NCrontab.CrontabSchedule"/>.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerTaskWrapper.Task">
+            <summary>
+            Gets or sets the <see cref="T:NetCoreLearning.Infrastructure.Scheduling.NCrontab.IScheduledTask"/> to execute.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerTaskWrapper.LastRunTime">
+            <summary>
+            Gets or sets the last run time of the task.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerTaskWrapper.NextRunTime">
+            <summary>
+            Gets or sets the next run time of the task.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerTaskWrapper.Increment">
+            <summary>
+            Increments this instance by one occurrence.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerTaskWrapper.ShouldRun(System.DateTime)">
+            <summary>
+            Indicates whether this scheduler should run.
+            </summary>
+            <param name="currentTime">The current time.</param>
+            <returns><c>true</c> in case it should run;otherwise <c>false</c></returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker">
+            <summary>
+            This is a background service that executes scheduled tasks of type <see cref="T:NetCoreLearning.Infrastructure.Scheduling.NCrontab.IScheduledTask"/><br></br>
+            that have been added as services in Service provider utilizing NCrontab nuget package.
+            </summary>
+            <seealso cref="T:Microsoft.Extensions.Hosting.BackgroundService" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker.#ctor(Microsoft.Extensions.Logging.ILogger{NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker},System.Collections.Generic.IEnumerable{NetCoreLearning.Infrastructure.Scheduling.NCrontab.IScheduledTask})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker"/> class.
+            </summary>
+            <param name="logger">The logger interface.</param>
+            <param name="scheduledTasks">The scheduled tasks to initiate.</param>
+            <exception cref="T:System.ArgumentNullException">
+            logger
+            or
+            scheduledTasks
+            </exception>
+            <remarks>
+            This class runs <see cref="T:NetCoreLearning.Infrastructure.Scheduling.NCrontab.IScheduledTask"/>s as new <see cref="T:System.Threading.Tasks.Task"/>s asynchronously in the default task scheduler.<br></br>
+            It keeps the tasks in a Concurrent Dictionary so that it waits all the running tasks to be finished in case of gracefully shut down.<br></br>
+            In case of an error to one of any scheduled tasks, it stops gracefully because no error is expected.
+            </remarks>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            Triggered when the application host is ready to start the service.
+            </summary>
+            <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that starts this instance</returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+            Triggered when the application host is performing a graceful shutdown.
+            </summary>
+            <param name="cancellationToken">Indicates that the shutdown process should no longer be graceful.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that stops gracefully this instance</returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker.Dispose">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            This method is called when the <see cref="T:Microsoft.Extensions.Hosting.IHostedService" /> starts.<br></br>
+            Runs forever until a cancellation is requested and executes the scheduled tasks.
+            </summary>
+            <param name="stoppingToken">Triggered when <see cref="M:Microsoft.Extensions.Hosting.IHostedService.StopAsync(System.Threading.CancellationToken)" /> is called.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task" /> that represents the long running operations.
+            </returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker.WaitRunningTasksToFinish">
+            <summary>
+            Waits the running tasks to finish.
+            </summary>
+        </member>
+    </members>
+</doc>

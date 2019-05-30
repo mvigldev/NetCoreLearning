@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCoreLearning.Infrastructure.EventBus.Database</name>
+    </assembly>
+    <members>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.EventLog">
+            <summary>
+            Class that represent a log entry for an event of the service bus.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.EventLog.EventId">
+            <summary>
+            Gets the event identifier.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.EventLog.EventTypeName">
+            <summary>
+            Gets the event type name.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.EventLog.State">
+            <summary>
+            Gets the state of the event.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.EventLog.CreationTime">
+            <summary>
+            Gets the event creation date.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.EventLog.TimesSent">
+            <summary>
+            Gets the number of tries that the event was tried to be published.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.EventLog.Content">
+            <summary>
+            Gets the model of the event in Json format.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.EventLog.EventModel">
+            <summary>
+            Gets the model of the event.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLog.#ctor(System.Guid,System.DateTime,System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.EventBus.Database.EventLog"/> class.
+            </summary>
+            <param name="eventId">The event identifier.</param>
+            <param name="eventCreationDate">The event creation date.</param>
+            <param name="eventType">Type of the event.</param>
+            <param name="eventModel">The event model.</param>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLog.DeserializeJsonContent(System.Type)">
+            <summary>
+            De serializes the content of the event from json to object of type <paramref name="type"/>.
+            </summary>
+            <param name="type">The type of the model of the event.</param>
+            <returns>this instance</returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.EventLogContext">
+            <summary>
+            The event log entries data access.
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLogContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{NetCoreLearning.Infrastructure.EventBus.Database.EventLogContext})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.EventBus.Database.EventLogContext"/> class.
+            </summary>
+            <param name="options">The options.</param>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.EventLogContext.EventLogs">
+            <summary>
+            Gets or sets the event logs.
+            </summary>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.EventLogService">
+            <summary>
+            THe service responsible for executing the event log database operations.
+            </summary>
+            <seealso cref="T:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogService" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLogService.#ctor(System.Data.Common.DbConnection)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.EventBus.Database.EventLogService"/> class.
+            </summary>
+            <param name="dbConnection">The database connection.</param>
+            <exception cref="T:System.ArgumentNullException">dbConnection</exception>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLogService.RetrieveEventLogsPendingToPublishAsync(System.Type)">
+            <summary>
+            Retrieves the event logs pending to publish asynchronous.
+            </summary>
+            <param name="eventModelType">Type of the event model.</param>
+            <returns>A task that executes this operation</returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLogService.SaveEventAsync``1(NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event{``0},System.Data.Common.DbTransaction)">
+            <summary>
+            Saves the event asynchronous in the event logging database.
+            </summary>
+            <typeparam name="T">The type of the event model</typeparam>
+            <param name="event">The event to save.</param>
+            <param name="transaction">The transaction to execute the operation.</param>
+            <returns>
+            A task that executes this operation
+            </returns>
+            <exception cref="T:System.ArgumentNullException">transaction - A {typeof(DbTransaction).FullName}</exception>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLogService.MarkEventAsPublishedAsync(System.Guid)">
+            <summary>
+            Marks the event as published asynchronous.
+            </summary>
+            <param name="eventId">The event identifier.</param>
+            <returns>
+            A task that executes this operation
+            </returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLogService.MarkEventAsInProgressAsync(System.Guid)">
+            <summary>
+            Marks the event as in progress asynchronous.
+            </summary>
+            <param name="eventId">The event identifier.</param>
+            <returns>
+            A task that executes this operation
+            </returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLogService.MarkEventAsFailedAsync(System.Guid)">
+            <summary>
+            Marks the event as failed asynchronous.
+            </summary>
+            <param name="eventId">The event identifier.</param>
+            <returns>
+            A task that executes this operation
+            </returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.EventLogServiceFactory">
+            <summary>
+            <see cref="T:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogServiceFactory"/> factory implementation.
+            </summary>
+            <seealso cref="T:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogServiceFactory" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.EventLogServiceFactory.CreateEventLogService(Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            Creates an event log service.
+            </summary>
+            <param name="context">The context that will be used for data access.</param>
+            <returns>An <see cref="T:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogService"/> instance.</returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.EventStateEnum">
+            <summary>
+            Represents an enumeration of the states that an event can take.
+            </summary>
+        </member>
+        <member name="F:NetCoreLearning.Infrastructure.EventBus.Database.EventStateEnum.NotPublished">
+            <summary>
+            During event creation.
+            </summary>
+        </member>
+        <member name="F:NetCoreLearning.Infrastructure.EventBus.Database.EventStateEnum.InProgress">
+            <summary>
+            Just before trying to bublish
+            </summary>
+        </member>
+        <member name="F:NetCoreLearning.Infrastructure.EventBus.Database.EventStateEnum.Published">
+            <summary>
+            Just after published
+            </summary>
+        </member>
+        <member name="F:NetCoreLearning.Infrastructure.EventBus.Database.EventStateEnum.PublishedFailed">
+            <summary>
+            Just after trying publishing the event and failed
+            </summary>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogService">
+            <summary>
+            Contract for event log service actions
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogService.SaveEventAsync``1(NetCoreLearning.Infrastructure.EventBus.NServiceBus.Event{``0},System.Data.Common.DbTransaction)">
+            <summary>
+            Saves the event asynchronous in the event logging database.
+            </summary>
+            <typeparam name="T">The type of the event model</typeparam>
+            <param name="event">The event to save.</param>
+            <param name="transaction">The transaction to execute the operation.</param>
+            <returns>A task that executes this operation</returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogService.MarkEventAsPublishedAsync(System.Guid)">
+            <summary>
+            Marks the event as published asynchronous.
+            </summary>
+            <param name="eventId">The event identifier.</param>
+            <returns>A task that executes this operation</returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogService.MarkEventAsInProgressAsync(System.Guid)">
+            <summary>
+            Marks the event as in progress asynchronous.
+            </summary>
+            <param name="eventId">The event identifier.</param>
+            <returns>A task that executes this operation</returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogService.MarkEventAsFailedAsync(System.Guid)">
+            <summary>
+            Marks the event as failed asynchronous.
+            </summary>
+            <param name="eventId">The event identifier.</param>
+            <returns>A task that executes this operation</returns>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogService.RetrieveEventLogsPendingToPublishAsync(System.Type)">
+            <summary>
+            Retrieves the event logs pending to be publish asynchronous.
+            </summary>
+            <param name="eventModelType">Type of the event model.</param>
+            <returns>A task that executes this operation</returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogServiceFactory">
+            <summary>
+            Contract for event log service factory
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.IEventLogServiceFactory.CreateEventLogService(Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            Creates an event log service.
+            </summary>
+            <param name="context">The context that will be used for data access.</param>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.IResilientTransaction">
+            <summary>
+            Contract for a class that executes a database transaction on a <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/>.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.IResilientTransaction.ExecuteAsync(Microsoft.EntityFrameworkCore.DbContext,System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Executes the asynchronous operation.
+            </summary>
+            <param name="context">The context to create the transaction on.</param>
+            <param name="action">The action to execute.</param>
+            <returns>
+            A tasks that executes the operation
+            </returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.ResilientTransaction">
+            <summary>
+            Class which is responsible to use the same database transaction for multiple contexts.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.ResilientTransaction.ExecuteAsync(Microsoft.EntityFrameworkCore.DbContext,System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Executes the asynchronous operation.
+            </summary>
+            <param name="context">The context to create the transaction on.</param>
+            <param name="action">The action to execute.</param>
+            <returns>
+            A tasks that executes the operation
+            </returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.ScheduledTasks.PublishPendingEventsTask`1">
+            <summary>
+            Publishes pending events of type <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">The type of the model of the event</typeparam>
+            <seealso cref="T:NetCoreLearning.Infrastructure.Scheduling.NCrontab.IScheduledTask" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.ScheduledTasks.PublishPendingEventsTask`1.#ctor(Microsoft.Extensions.Logging.ILogger{NetCoreLearning.Infrastructure.Scheduling.NCrontab.SchedulerWorker},NetCoreLearning.Infrastructure.EventBus.Database.EventLogContext,Microsoft.Extensions.Options.IOptions{NetCoreLearning.Infrastructure.EventBus.Database.Settings.PublishPendingEventsTaskSettings},NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBusPublisher{`0},NetCoreLearning.Infrastructure.EventBus.Database.IEventLogServiceFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.EventBus.Database.ScheduledTasks.PublishPendingEventsTask`1"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="context">The context.</param>
+            <param name="settings">The settings.</param>
+            <param name="eventBus">The event bus.</param>
+            <param name="eventLogServiceFactory">The event log service factory.</param>
+            <exception cref="T:System.ArgumentNullException">
+            logger
+            or
+            context
+            or
+            eventBus
+            or
+            eventLogServiceFactory
+            </exception>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.ScheduledTasks.PublishPendingEventsTask`1.Schedule">
+            <summary>
+            Gets the croon expression that the task will be executed.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.EventBus.Database.ScheduledTasks.PublishPendingEventsTask`1.ExecuteAsync">
+            <summary>
+            Executes the asynchronous task according to the schedule.
+            </summary>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task" /> that will execute the task.
+            </returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.EventBus.Database.Settings.PublishPendingEventsTaskSettings">
+            <summary>
+            Settings from app.json for <see cref="T:NetCoreLearning.Infrastructure.EventBus.Database.ScheduledTasks.PublishPendingEventsTask`1"/>
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.EventBus.Database.Settings.PublishPendingEventsTaskSettings.Schedule">
+            <summary>
+            Gets or sets the cron-expression.
+            </summary>
+        </member>
+    </members>
+</doc>

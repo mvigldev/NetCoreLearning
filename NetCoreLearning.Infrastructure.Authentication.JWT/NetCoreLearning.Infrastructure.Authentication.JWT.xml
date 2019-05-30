@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCoreLearning.Infrastructure.Authentication.JWT</name>
+    </assembly>
+    <members>
+        <member name="T:NetCoreLearning.Infrastructure.Authentication.JWT.Handlers.MinimumAgeHandler">
+            <summary>
+            The handler to be executed for the user when the policy is applied.
+            </summary>
+            <seealso cref="N:Microsoft.AspNetCore.Authorization" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Authentication.JWT.Handlers.MinimumAgeHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,NetCoreLearning.Infrastructure.Authentication.JWT.Requirements.MinimumAgeRequirement)">
+            <summary>
+            Makes a decision if authorization is allowed based on a specific requirement.
+            </summary>
+            <param name="context">The authorization context.</param>
+            <param name="requirement">The requirement to evaluate.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> with the decision.</returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.Authentication.JWT.IAuthenticateService">
+            <summary>
+            Contract for taken based authentication service 
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Authentication.JWT.IAuthenticateService.IsAuthenticated(NetCoreLearning.Infrastructure.Authentication.JWT.TokenRequest,System.String@)">
+            <summary>
+            Determines whether the specified request is authenticated.
+            </summary>
+            <param name="request">The request to process.</param>
+            <param name="token">The token to validate.</param>
+            <returns>
+              <c>true</c> if the specified request is authenticated; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.Authentication.JWT.IUserManagementService">
+            <summary>
+            The contract for the user management service for user validations
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Authentication.JWT.IUserManagementService.IsValidUser(System.String,System.String)">
+            <summary>
+            Determines whether th provided credentials are valid.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>
+              <c>true</c> if the credentials are valid; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.Authentication.JWT.Requirements.MinimumAgeRequirement">
+            <summary>
+            This is an <see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement"/> that represents a minimum age for the user.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Authentication.JWT.Requirements.MinimumAgeRequirement.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.Authentication.JWT.Requirements.MinimumAgeRequirement"/> class.
+            </summary>
+            <param name="age">The age to set.</param>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Authentication.JWT.Requirements.MinimumAgeRequirement.MinimumAge">
+            <summary>
+            Gets or sets the minimum age of the user.
+            </summary>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.Authentication.JWT.TokenAuthenticationService">
+            <summary>
+            Token based authentication service implementation utilizing nuget package System.IdentityModel.Tokens.Jwt. Processes a request that contains a token.
+            </summary>
+            <seealso cref="T:NetCoreLearning.Infrastructure.Authentication.JWT.IAuthenticateService" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Authentication.JWT.TokenAuthenticationService.#ctor(NetCoreLearning.Infrastructure.Authentication.JWT.IUserManagementService,Microsoft.Extensions.Options.IOptions{NetCoreLearning.Infrastructure.Authentication.JWT.TokenManagement})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.Infrastructure.Authentication.JWT.TokenAuthenticationService"/> class.
+            </summary>
+            <param name="service">The <see cref="T:NetCoreLearning.Infrastructure.Authentication.JWT.IUserManagementService"/> that will be used.</param>
+            <param name="tokenManagement">The <see cref="T:NetCoreLearning.Infrastructure.Authentication.JWT.TokenManagement"/> hat will be used.</param>
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Authentication.JWT.TokenAuthenticationService.IsAuthenticated(NetCoreLearning.Infrastructure.Authentication.JWT.TokenRequest,System.String@)">
+            <summary>
+            Determines whether the specified request is authenticated and if it is, creates the token with the user claims.
+            </summary>
+            <param name="request">The request to process.</param>
+            <param name="token">The token to validate.</param>
+            <returns>
+              <c>true</c> if the specified request is authenticated; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.Authentication.JWT.TokenManagement">
+            <summary>
+            Configuration json object
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Authentication.JWT.TokenManagement.Secret">
+            <summary>
+                Gets or sets the Microsoft.IdentityModel.Tokens.SecurityKey that is to be used
+                for signature validation.       
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Authentication.JWT.TokenManagement.Issuer">
+            <summary>
+             Gets or sets a System.String that represents a valid issuer that will be used
+                to check against the token's issuer.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Authentication.JWT.TokenManagement.Audience">
+            <summary>
+            Gets or sets a string that represents a valid audience that will be used to check
+                against the token's audience.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Authentication.JWT.TokenManagement.AccessExpiration">
+            <summary>
+            Gets or sets the access expiration in absolute expiration mode.
+            </summary>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.Authentication.JWT.TokenRequest">
+            <summary>
+            Model for any API that requests a toke.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Authentication.JWT.TokenRequest.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.Infrastructure.Authentication.JWT.TokenRequest.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+        </member>
+        <member name="T:NetCoreLearning.Infrastructure.Authentication.JWT.UserManagementService">
+            <summary>
+            The service that validates user credentials
+            </summary>
+            <seealso cref="T:NetCoreLearning.Infrastructure.Authentication.JWT.IUserManagementService" />
+        </member>
+        <member name="M:NetCoreLearning.Infrastructure.Authentication.JWT.UserManagementService.IsValidUser(System.String,System.String)">
+            <summary>
+            Determines whether a user is valid according to <paramref name="userName"/> and <paramref name="password"/>.
+            </summary>
+            <param name="userName">The name of the user.</param>
+            <param name="password">The password of the user.</param>
+            <returns>
+              <c>true</c> if user is valid; otherwise, <c>false</c>.
+            </returns>
+        </member>
+    </members>
+</doc>
