@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCoreLearning.SchoolLessons.API</name>
+    </assembly>
+    <members>
+        <member name="T:NetCoreLearning.SchoolLessons.API.Controllers.AuthenticationController">
+            <summary>
+            Accepts authentication requests and validates credentials, than in success provides a JWT token.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.AuthenticationController.#ctor(NetCoreLearning.Infrastructure.Authentication.JWT.IAuthenticateService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.API.Controllers.AuthenticationController"/> class.
+            </summary>
+            <param name="authService">The authentication service.</param>
+            <exception cref="T:System.ArgumentNullException">authService</exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.AuthenticationController.RequestToken(NetCoreLearning.Infrastructure.Authentication.JWT.TokenRequest)">
+            <summary>
+            Requests the token.
+            </summary>
+            <param name="request">The request.</param>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.Controllers.BaseController">
+            <summary>
+            Base api controller that contains the policy of minimum age
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.Controllers.GradesAssignmentsController">
+            <summary>
+            Grades AssigmentsController endpoint
+            </summary>
+            <seealso cref="T:NetCoreLearning.SchoolLessons.API.Controllers.BaseController" />
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.GradesAssignmentsController.#ctor(NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext,Microsoft.Extensions.Logging.ILogger{NetCoreLearning.SchoolLessons.API.Controllers.GradesAssignmentsController},Microsoft.Extensions.Caching.Memory.IMemoryCache,NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBusPublisher{NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment},NetCoreLearning.Infrastructure.EventBus.Database.IEventLogServiceFactory,NetCoreLearning.Infrastructure.EventBus.Database.IResilientTransaction)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.API.Controllers.GradesAssignmentsController" /> class.
+            </summary>
+            <param name="context">The context to store the data.</param>
+            <param name="logger">The logger for logging.</param>
+            <param name="cache">The cache.</param>
+            <param name="eventBus">The  event publisher.</param>
+            <param name="eventLogServiceFactory">The event log service factory.</param>
+            <param name="resilientTransaction">The transaction to have atomicity between publish event and save changes.</param>
+            <exception cref="T:System.ArgumentNullException">context
+            or
+            logger</exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.GradesAssignmentsController.Get(System.Guid)">
+            <summary>
+            Gets the specified grade assignment.
+            </summary>
+            <param name="id">The database identifier of the grade assignment.</param>
+            <returns>The <see cref="T:NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment"/> found</returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.GradesAssignmentsController.Post(NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment)">
+            <summary>
+            Creates the specified grade assignment.
+            </summary>
+            <param name="gradeAssignment">The grade assignment to create in the database.</param>
+            <returns>The created <see cref="T:NetCoreLearning.SchoolLessons.DomainModel.GradeAssignment"/> </returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.Controllers.LessonsController">
+            <summary>
+            Controller for Lessons
+            </summary>
+            <seealso cref="T:NetCoreLearning.SchoolLessons.API.Controllers.BaseController" />
+        </member>
+        <member name="F:NetCoreLearning.SchoolLessons.API.Controllers.LessonsController._context">
+            <summary>
+            The context to access db
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.LessonsController.#ctor(NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.API.Controllers.LessonsController"/> class.
+            </summary>
+            <param name="context">The context.</param>
+            <exception cref="T:System.ArgumentNullException">context</exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.LessonsController.Get">
+            <summary>
+            Gets the list of lessons.
+            </summary>
+            <returns>The lessons in the db</returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.Controllers.ProfessorsController">
+            <summary>
+            Controller for professors
+            </summary>
+            <seealso cref="T:NetCoreLearning.SchoolLessons.API.Controllers.BaseController" />
+        </member>
+        <member name="F:NetCoreLearning.SchoolLessons.API.Controllers.ProfessorsController._context">
+            <summary>
+            The context to access db
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.ProfessorsController.#ctor(NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.API.Controllers.ProfessorsController"/> class.
+            </summary>
+            <param name="context">The context.</param>
+            <exception cref="T:System.ArgumentNullException">context</exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.ProfessorsController.Get">
+            <summary>
+            Gets the list of professors.
+            </summary>
+            <returns>The professors in the db</returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.Controllers.StudentsController">
+            <summary>
+            Controller for students
+            </summary>
+            <seealso cref="T:NetCoreLearning.SchoolLessons.API.Controllers.BaseController" />
+        </member>
+        <member name="F:NetCoreLearning.SchoolLessons.API.Controllers.StudentsController._context">
+            <summary>
+            The context to access db
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.StudentsController.#ctor(NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.API.Controllers.StudentsController"/> class.
+            </summary>
+            <param name="context">The context.</param>
+            <exception cref="T:System.ArgumentNullException">context</exception>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Controllers.StudentsController.Get">
+            <summary>
+            Gets the list of students.
+            </summary>
+            <returns>The students in the db</returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext">
+            <summary>
+            The database context for the API
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext"/> class.
+            </summary>
+            <param name="options">The options for the context.</param>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext.GradeAssignments">
+            <summary>
+            Gets or sets the grade assignments.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext.Professors">
+            <summary>
+            Gets or sets the professors.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext.Lessons">
+            <summary>
+            Gets or sets the lessons.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext.Students">
+            <summary>
+            Gets or sets the students.
+            </summary>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.ErrorDetails">
+            <summary>
+            The error details for global error handling.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.API.ErrorDetails.StatusCode">
+            <summary>
+            Gets or sets the status code.
+            </summary>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.API.ErrorDetails.Message">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.ErrorDetails.ToString">
+            <summary>
+            Converts to string.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.ExceptionMiddlewareExtensions">
+            <summary>
+            Middle ware Extensions
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.ExceptionMiddlewareExtensions.ConfigureExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Logging.ILogger{NetCoreLearning.SchoolLessons.API.ErrorDetails})">
+            <summary>
+            Configures the exception handler of the app.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            Creates the web host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.ServiceExtensions">
+            <summary>
+            Services Extension methods
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.ServiceExtensions.AddJWTAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds the JWT authentication, 1 <see cref="T:NetCoreLearning.Infrastructure.Authentication.JWT.Requirements.MinimumAgeRequirement"/> policy .
+            </summary>
+            <param name="services">The services.</param>
+            <param name="configuration">The configuration.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.ServiceExtensions.AddSwaggerForAPI(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the custom swagger to the services.
+            </summary>
+            <param name="services">The services collection.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.ServiceExtensions.AddSchoolLessonsDBContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds the <see cref="T:NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext"/>to the services.
+            </summary>
+            <param name="services">The services.</param>
+            <param name="configuration">The configuration.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.ServiceExtensions.AddEventBusLoggingDBContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds the <see cref="T:NetCoreLearning.Infrastructure.EventBus.Database.EventLogContext"/>to the services.
+            </summary>
+            <param name="services">The services.</param>
+            <param name="configuration">The configuration.</param>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreLearning.SchoolLessons.API.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetCoreLearning.SchoolLessons.API.Startup" /> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="P:NetCoreLearning.SchoolLessons.API.Startup.Configuration">
+            <summary>
+            Gets the configuration of the app.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Hosting.IApplicationLifetime,Microsoft.Extensions.Hosting.IHostingEnvironment,NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext,Microsoft.Extensions.Caching.Memory.IMemoryCache,NetCoreLearning.Infrastructure.EventBus.NServiceBus.IEventBus,Microsoft.Extensions.Logging.ILogger{NetCoreLearning.SchoolLessons.API.ErrorDetails})">
+            <summary>
+            Configures the specified application.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="applicationLifetime">The application lifetime.</param>
+            <param name="env">The env.</param>
+            <param name="context">The context.</param>
+            <param name="cache">The cache.</param>
+            <param name="eventBus">The event bus.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Startup.OnShutdown">
+            <summary>
+            Called when app stops.
+            </summary>
+        </member>
+        <member name="M:NetCoreLearning.SchoolLessons.API.Startup.InitCache(NetCoreLearning.SchoolLessons.API.Database.SchoolLessonsContext,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            Initializes the cache first time only.
+            </summary>
+            <param name="context">The context to access db.</param>
+            <param name="cache">The cache to init.</param>
+        </member>
+    </members>
+</doc>
