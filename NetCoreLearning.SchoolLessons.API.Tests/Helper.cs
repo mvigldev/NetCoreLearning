@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;;
+using Microsoft.Extensions.Logging;
 
 namespace NetCoreLearning.SchoolLessons.API.Tests
 {
